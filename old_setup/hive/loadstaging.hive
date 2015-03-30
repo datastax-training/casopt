@@ -1,0 +1,10 @@
+load data local inpath '0210.csv' overwrite into table trades_staging;
+load data local inpath '0211.csv' into table trades_staging;
+load data local inpath '0212.csv' into table trades_staging;
+load data local inpath '0213.csv' into table trades_staging;
+load data local inpath '0214.csv' into table trades_staging;
+load data local inpath '0218.csv' into table trades_staging;
+load data local inpath '0219.csv' into table trades_staging;
+load data local inpath '0220.csv' into table trades_staging;
+load data local inpath '0221.csv' into table trades_staging;
+

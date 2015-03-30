@@ -1,0 +1,14 @@
+-- join the company table to denormalize the company name
+-- generate random uuids for the extra_id column
+-- add a canned description string
+-- for datehour, figure out the hour in the trading day.  9:00 AM = 1 as somehow the utc converion can be off if this is run during daylight savings time.  not easy to adjust.
+-- The data is mostly standard time.  Will need to fix if we have data for dst
+
+
+insert into table trades select  t.trade_id, c.company_name, 'Most stocks are traded on exchanges, which are places where buyers and sellers meet and decide on a price. Some exchanges are physical locations where transactions are carried out on a trading floor.', t.exchng, unhex(regexp_replace(reflect('java.util.UUID','randomUUID'), '-', '')), t.price, t.quantity, t.ticker, substr(t.trade_date,1,19), substr(t.trade_timestamp,1,19) from trades_staging t join tickers c on (t.ticker = c.ticker);
+
+insert into table trades_by_tickerday select  t.ticker,  substr(t.trade_date,1,19),substr(t.trade_timestamp,1,19), t.trade_id, c.company_name, 'Most stocks are traded on exchanges, which are places where buyers and sellers meet and decide on a price. Some exchanges are physical locations where transactions are carried out on a trading floor.', t.exchng, unhex(regexp_replace(reflect('java.util.UUID','randomUUID'), '-', '')), t.price, t.quantity  from trades_staging t join tickers c on (t.ticker = c.ticker);
+
+insert into table trades_by_datehour select substr(t.trade_date,1,19), floor((unix_timestamp(t.trade_timestamp,'yyyy-MM-dd HH:mm:ssZ') - unix_timestamp(t.trade_date,'yyyy-MM-dd HH:mm:ssZ'))  / 3600) - 14, substr(t.trade_timestamp,1,19),  t.trade_id, t.ticker, c.company_name, 'Most stocks are traded on exchanges, which are places where buyers and sellers meet and decide on a price. Some exchanges are physical locations where transactions are carried out on a trading floor.', t.exchng, unhex(regexp_replace(reflect('java.util.UUID','randomUUID'), '-', '')), t.price, t.quantity  from trades_staging t join tickers c on (t.ticker = c.ticker);
+
+

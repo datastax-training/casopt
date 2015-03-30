@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="2.7" jmeter="2.12.20150107">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>false</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>false</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <threadCounts>true</threadCounts>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <org.apache.cassandra.jmeter.config.CassandraConnection guiclass="TestBeanGUI" testclass="org.apache.cassandra.jmeter.config.CassandraConnection" testname="Cassandra Connection" enabled="true">
+        <stringProp name="contactPoints">${__P(hostname,node0)}</stringProp>
+        <stringProp name="keyspace">stupormail</stringProp>
+        <stringProp name="loadBalancer">Default</stringProp>
+        <stringProp name="localDataCenter"></stringProp>
+        <stringProp name="password"></stringProp>
+        <stringProp name="sessionName">cluster</stringProp>
+        <stringProp name="username"></stringProp>
+      </org.apache.cassandra.jmeter.config.CassandraConnection>
+      <hashTree/>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Readers" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(numUsers,20)}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">60</stringProp>
+        <longProp name="ThreadGroup.start_time">1422604831000</longProp>
+        <longProp name="ThreadGroup.end_time">1422604831000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+          <stringProp name="delimiter">|</stringProp>
+          <stringProp name="fileEncoding"></stringProp>
+          <stringProp name="filename">/DISFIGURED/csv/attachments.csv</stringProp>
+          <boolProp name="quotedData">false</boolProp>
+          <boolProp name="recycle">true</boolProp>
+          <stringProp name="shareMode">shareMode.all</stringProp>
+          <boolProp name="stopThread">false</boolProp>
+          <stringProp name="variableNames">username_i,mailbox_i,msgdate_i,message_id_i,filename_i</stringProp>
+        </CSVDataSet>
+        <hashTree/>
+        <org.apache.cassandra.jmeter.sampler.CassandraSampler guiclass="TestBeanGUI" testclass="org.apache.cassandra.jmeter.sampler.CassandraSampler" testname="1: Mailboxes for a user" enabled="true">
+          <stringProp name="batchSize"></stringProp>
+          <stringProp name="consistencyLevel">QUORUM</stringProp>
+          <stringProp name="query">select mailbox from email where user = ? limit 1000;</stringProp>
+          <stringProp name="queryArguments">${username_i}</stringProp>
+          <stringProp name="queryType">Prepared Statement</stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="sessionName">cluster</stringProp>
+          <stringProp name="variableNames">MAILBOXES</stringProp>
+          <stringProp name="TestPlan.comments">Get email boxes for user</stringProp>
+        </org.apache.cassandra.jmeter.sampler.CassandraSampler>
+        <hashTree/>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Simple Controller" enabled="true"/>
+        <hashTree>
+          <org.apache.cassandra.jmeter.sampler.CassandraSampler guiclass="TestBeanGUI" testclass="org.apache.cassandra.jmeter.sampler.CassandraSampler" testname="2: First 20 in given mailbox" enabled="true">
+            <stringProp name="sessionName">cluster</stringProp>
+            <stringProp name="queryType">Prepared Statement</stringProp>
+            <stringProp name="query">select msgdate, fromlist, message_id,subject from email where user = ? and mailbox = ?  limit 20
+</stringProp>
+            <stringProp name="queryArguments">${username_i},${mailbox_i}</stringProp>
+            <stringProp name="variableNames">MSGDATE,FROMLIST,MESSAGE_ID,SUBJECT</stringProp>
+            <stringProp name="resultVariable"></stringProp>
+            <stringProp name="consistencyLevel">QUORUM</stringProp>
+            <stringProp name="batchSize"></stringProp>
+          </org.apache.cassandra.jmeter.sampler.CassandraSampler>
+          <hashTree/>
+          <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+            <boolProp name="LoopController.continue_forever">true</boolProp>
+            <stringProp name="LoopController.loops">4</stringProp>
+          </LoopController>
+          <hashTree>
+            <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="Random Message" enabled="true">
+              <stringProp name="variableName">RANDOM_MSG</stringProp>
+              <stringProp name="outputFormat"></stringProp>
+              <stringProp name="minimumValue">1</stringProp>
+              <stringProp name="maximumValue">19</stringProp>
+              <stringProp name="randomSeed"></stringProp>
+              <boolProp name="perThread">false</boolProp>
+            </RandomVariableConfig>
+            <hashTree/>
+            <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If this message is valid" enabled="true">
+              <stringProp name="IfController.condition">${RANDOM_MSG} &lt; ${MSGDATE_#}</stringProp>
+              <boolProp name="IfController.evaluateAll">false</boolProp>
+            </IfController>
+            <hashTree>
+              <org.apache.cassandra.jmeter.sampler.CassandraSampler guiclass="TestBeanGUI" testclass="org.apache.cassandra.jmeter.sampler.CassandraSampler" testname="3: One Message" enabled="true">
+                <stringProp name="sessionName">cluster</stringProp>
+                <stringProp name="queryType">Prepared Statement</stringProp>
+                <stringProp name="query">select msgdate, fromlist, message_id, subject, body from email where user = ? and mailbox = ? and msgdate = ? and message_id = ?
+</stringProp>
+                <stringProp name="queryArguments">${username_i},${mailbox_i},${__V(MSGDATE_${RANDOM_MSG})},${__V(MESSAGE_ID_${RANDOM_MSG})}</stringProp>
+                <stringProp name="variableNames"></stringProp>
+                <stringProp name="resultVariable"></stringProp>
+                <stringProp name="consistencyLevel">QUORUM</stringProp>
+                <stringProp name="batchSize"></stringProp>
+              </org.apache.cassandra.jmeter.sampler.CassandraSampler>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <org.apache.cassandra.jmeter.sampler.CassandraSampler guiclass="TestBeanGUI" testclass="org.apache.cassandra.jmeter.sampler.CassandraSampler" testname="4: Message with Attachments" enabled="true">
+            <stringProp name="sessionName">cluster</stringProp>
+            <stringProp name="queryType">Prepared Statement</stringProp>
+            <stringProp name="query">select msgdate, fromlist, message_id, subject, body from email where user = ? and mailbox = ? and msgdate = ? and message_id = ?
+</stringProp>
+            <stringProp name="queryArguments">${username_i},${mailbox_i},${msgdate_i},${message_id_i}</stringProp>
+            <stringProp name="variableNames"></stringProp>
+            <stringProp name="resultVariable"></stringProp>
+            <stringProp name="consistencyLevel">QUORUM</stringProp>
+            <stringProp name="batchSize"></stringProp>
+          </org.apache.cassandra.jmeter.sampler.CassandraSampler>
+          <hashTree/>
+          <org.apache.cassandra.jmeter.sampler.CassandraSampler guiclass="TestBeanGUI" testclass="org.apache.cassandra.jmeter.sampler.CassandraSampler" testname="5: Attachments for message" enabled="true">
+            <stringProp name="sessionName">cluster</stringProp>
+            <stringProp name="queryType">Prepared Statement</stringProp>
+            <stringProp name="query">select filename from attachments where user = ? and mailbox = ? and msgdate = ? and message_id = ?
+</stringProp>
+            <stringProp name="queryArguments">${username_i},${mailbox_i},${msgdate_i},${message_id_i}</stringProp>
+            <stringProp name="variableNames"></stringProp>
+            <stringProp name="resultVariable"></stringProp>
+            <stringProp name="consistencyLevel">QUORUM</stringProp>
+            <stringProp name="batchSize"></stringProp>
+          </org.apache.cassandra.jmeter.sampler.CassandraSampler>
+          <hashTree/>
+          <org.apache.cassandra.jmeter.sampler.CassandraSampler guiclass="TestBeanGUI" testclass="org.apache.cassandra.jmeter.sampler.CassandraSampler" testname="6: Open Attachment" enabled="true">
+            <stringProp name="sessionName">cluster</stringProp>
+            <stringProp name="queryType">Prepared Statement</stringProp>
+            <stringProp name="query">select content_type, bytes from attachments where user = ? and mailbox = ? and msgdate = ? and message_id = ? and filename = ?
+</stringProp>
+            <stringProp name="queryArguments">${username_i},${mailbox_i},${msgdate_i},${message_id_i},${filename_i}</stringProp>
+            <stringProp name="variableNames"></stringProp>
+            <stringProp name="resultVariable"></stringProp>
+            <stringProp name="consistencyLevel">QUORUM</stringProp>
+            <stringProp name="batchSize"></stringProp>
+          </org.apache.cassandra.jmeter.sampler.CassandraSampler>
+          <hashTree/>
+          <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="4 more pages" enabled="true">
+            <boolProp name="LoopController.continue_forever">true</boolProp>
+            <stringProp name="LoopController.loops">4</stringProp>
+          </LoopController>
+          <hashTree>
+            <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If there are 20" enabled="true">
+              <stringProp name="IfController.condition">${MSGDATE_#} == 20</stringProp>
+              <boolProp name="IfController.evaluateAll">false</boolProp>
+            </IfController>
+            <hashTree>
+              <org.apache.cassandra.jmeter.sampler.CassandraSampler guiclass="TestBeanGUI" testclass="org.apache.cassandra.jmeter.sampler.CassandraSampler" testname="7: Next 20 in given mailbox" enabled="true">
+                <stringProp name="sessionName">cluster</stringProp>
+                <stringProp name="queryType">Prepared Statement</stringProp>
+                <stringProp name="query">select msgdate, fromlist, message_id,subject from email where user = ? and (mailbox, msgdate, message_id) &gt; (?,?,?) limit 20
+</stringProp>
+                <stringProp name="queryArguments">${username_i},${MAILBOXES_20},${MSGDATE_20},${MESSAGE_ID_20}</stringProp>
+                <stringProp name="variableNames">MSGDATE,FROMLIST,MESSAGE_ID,SUBJECT</stringProp>
+                <stringProp name="resultVariable"></stringProp>
+                <stringProp name="consistencyLevel">QUORUM</stringProp>
+                <stringProp name="batchSize"></stringProp>
+              </org.apache.cassandra.jmeter.sampler.CassandraSampler>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Writers" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <longProp name="ThreadGroup.start_time">1425268873000</longProp>
+        <longProp name="ThreadGroup.end_time">1425268873000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+          <stringProp name="filename">/DISFIGURED/csv/newemail.csv</stringProp>
+          <stringProp name="fileEncoding"></stringProp>
+          <stringProp name="variableNames">user_ni,mailbox_ni,subject_ni,body_ni</stringProp>
+          <stringProp name="delimiter">|</stringProp>
+          <boolProp name="quotedData">false</boolProp>
+          <boolProp name="recycle">true</boolProp>
+          <boolProp name="stopThread">false</boolProp>
+          <stringProp name="shareMode">shareMode.all</stringProp>
+        </CSVDataSet>
+        <hashTree/>
+        <org.apache.cassandra.jmeter.sampler.CassandraSampler guiclass="TestBeanGUI" testclass="org.apache.cassandra.jmeter.sampler.CassandraSampler" testname="8: Write email" enabled="true">
+          <stringProp name="sessionName">cluster</stringProp>
+          <stringProp name="queryType">Prepared Statement</stringProp>
+          <stringProp name="query">insert into email (user,mailbox,msgdate,message_id,subject,body) values (?,?,dateof(now()),?,?,?)</stringProp>
+          <stringProp name="queryArguments">${user_ni},${mailbox_ni}, &apos;${__RandomString(20)}&apos;,${subject_ni},${body_ni}</stringProp>
+          <stringProp name="variableNames"></stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="consistencyLevel">QUORUM</stringProp>
+          <stringProp name="batchSize"></stringProp>
+        </org.apache.cassandra.jmeter.sampler.CassandraSampler>
+        <hashTree/>
+        <ConstantThroughputTimer guiclass="TestBeanGUI" testclass="ConstantThroughputTimer" testname="Constant Throughput Timer" enabled="true">
+          <intProp name="calcMode">0</intProp>
+          <doubleProp>
+            <name>throughput</name>
+            <value>600.0</value>
+            <savedValue>0.0</savedValue>
+          </doubleProp>
+        </ConstantThroughputTimer>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>

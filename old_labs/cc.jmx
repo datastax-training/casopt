@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="2.6" jmeter="2.11 r1554548">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="hostname" elementType="Argument">
+            <stringProp name="Argument.name">hostname</stringProp>
+            <stringProp name="Argument.value">54.219.206.153</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="DESCRIPTION" elementType="Argument">
+            <stringProp name="Argument.name">DESCRIPTION</stringProp>
+            <stringProp name="Argument.value">Day trading is speculation in securities specifically buying and selling financial instruments within the same trading day such that all positions are usually closed before the market close for the trading day. Traders who participate in day trading are called active traders or day traders. Traders who trade in this capacity with the motive of profit assume the capital markets&apos; role of speculator.</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </Arguments>
+      <hashTree/>
+      <org.apache.cassandra.jmeter.config.CassandraConnection guiclass="TestBeanGUI" testclass="org.apache.cassandra.jmeter.config.CassandraConnection" testname="Cassandra nearby  Connection" enabled="true">
+        <stringProp name="dataSource">seaport1</stringProp>
+        <stringProp name="contactPoints">node2</stringProp>
+        <stringProp name="keyspace">stock</stringProp>
+        <stringProp name="username"></stringProp>
+        <stringProp name="password"></stringProp>
+        <stringProp name="sessionName">nearby</stringProp>
+        <stringProp name="loadBalancer">DCAwareRoundRobin</stringProp>
+        <stringProp name="localDataCenter">nearby</stringProp>
+      </org.apache.cassandra.jmeter.config.CassandraConnection>
+      <hashTree/>
+      <org.apache.cassandra.jmeter.config.CassandraConnection guiclass="TestBeanGUI" testclass="org.apache.cassandra.jmeter.config.CassandraConnection" testname="Cassandra faraway Connection" enabled="true">
+        <stringProp name="dataSource">seaport1</stringProp>
+        <stringProp name="contactPoints">node3</stringProp>
+        <stringProp name="keyspace">stock</stringProp>
+        <stringProp name="username"></stringProp>
+        <stringProp name="password"></stringProp>
+        <stringProp name="sessionName">faraway</stringProp>
+        <stringProp name="loadBalancer">DCAwareRoundRobin</stringProp>
+        <stringProp name="localDataCenter">faraway</stringProp>
+      </org.apache.cassandra.jmeter.config.CassandraConnection>
+      <hashTree/>
+      <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>false</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+        <boolProp name="useGroupName">true</boolProp>
+      </ResultCollector>
+      <hashTree/>
+      <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="Random Trade ID" enabled="true">
+        <stringProp name="maximumValue">41000000</stringProp>
+        <stringProp name="minimumValue">1</stringProp>
+        <stringProp name="outputFormat"></stringProp>
+        <boolProp name="perThread">true</boolProp>
+        <stringProp name="randomSeed"></stringProp>
+        <stringProp name="variableName">trade_id</stringProp>
+      </RandomVariableConfig>
+      <hashTree/>
+      <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="Random Hour" enabled="true">
+        <stringProp name="maximumValue">8</stringProp>
+        <stringProp name="minimumValue">1</stringProp>
+        <stringProp name="outputFormat"></stringProp>
+        <boolProp name="perThread">true</boolProp>
+        <stringProp name="randomSeed"></stringProp>
+        <stringProp name="variableName">tradehour</stringProp>
+      </RandomVariableConfig>
+      <hashTree/>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Nearby Writers" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">12</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">30</stringProp>
+        <longProp name="ThreadGroup.start_time">1394856749000</longProp>
+        <longProp name="ThreadGroup.end_time">1394856749000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="New Trades 0303" enabled="true">
+          <stringProp name="filename">/CASOPT/csv/0303.full.csv</stringProp>
+          <stringProp name="fileEncoding"></stringProp>
+          <stringProp name="variableNames">i_trade_id,i_ticker,i_exchng,i_trade_timestamp,i_price,i_quantity,i_trade_date,i_extra_id,i_company_name,i_tradehour</stringProp>
+          <stringProp name="delimiter">|</stringProp>
+          <boolProp name="quotedData">false</boolProp>
+          <boolProp name="recycle">false</boolProp>
+          <boolProp name="stopThread">true</boolProp>
+          <stringProp name="shareMode">shareMode.group</stringProp>
+        </CSVDataSet>
+        <hashTree/>
+        <org.apache.cassandra.jmeter.sampler.CassandraSampler guiclass="TestBeanGUI" testclass="org.apache.cassandra.jmeter.sampler.CassandraSampler" testname="Write trades" enabled="true">
+          <stringProp name="sessionName">nearby</stringProp>
+          <stringProp name="queryType">Prepared Statement</stringProp>
+          <stringProp name="query">insert into trades (trade_id,ticker,exchng,trade_timestamp, price , quantity , trade_date, company_name, description) values (?,?,?,?,?,?,?,?,?)</stringProp>
+          <stringProp name="queryArguments">${i_trade_id},${i_ticker},${i_exchng},${i_trade_timestamp},${i_price},${i_quantity},${i_trade_date},${i_company_name},${DESCRIPTION}</stringProp>
+          <stringProp name="variableNames"></stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="consistencyLevel">QUORUM</stringProp>
+          <stringProp name="queryTimeout"></stringProp>
+          <stringProp name="batchSize"></stringProp>
+        </org.apache.cassandra.jmeter.sampler.CassandraSampler>
+        <hashTree/>
+        <org.apache.cassandra.jmeter.sampler.CassandraSampler guiclass="TestBeanGUI" testclass="org.apache.cassandra.jmeter.sampler.CassandraSampler" testname="Write trades_by_tickerday" enabled="true">
+          <stringProp name="sessionName">nearby</stringProp>
+          <stringProp name="queryType">Prepared Statement</stringProp>
+          <stringProp name="query">insert into trades_by_tickerday (trade_id,ticker,exchng,trade_timestamp, price , quantity , trade_date, company_name, description) values (?,?,?,?,?,?,?,?,?)</stringProp>
+          <stringProp name="queryArguments">${i_trade_id},${i_ticker},${i_exchng},${i_trade_timestamp},${i_price},${i_quantity},${i_trade_date},${i_company_name},${DESCRIPTION}</stringProp>
+          <stringProp name="variableNames"></stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="consistencyLevel">QUORUM</stringProp>
+          <stringProp name="queryTimeout"></stringProp>
+          <stringProp name="batchSize"></stringProp>
+        </org.apache.cassandra.jmeter.sampler.CassandraSampler>
+        <hashTree/>
+        <org.apache.cassandra.jmeter.sampler.CassandraSampler guiclass="TestBeanGUI" testclass="org.apache.cassandra.jmeter.sampler.CassandraSampler" testname="Write trades_by_datehour" enabled="true">
+          <stringProp name="sessionName">nearby</stringProp>
+          <stringProp name="queryType">Prepared Statement</stringProp>
+          <stringProp name="query">insert into trades_by_datehour (trade_id,date_hour, ticker,exchng,trade_timestamp, price , quantity , trade_date, company_name, description) values (?,?,?,?,?,?,?,?,?,?)</stringProp>
+          <stringProp name="queryArguments">${i_trade_id},${i_tradehour},${i_ticker},${i_exchng},${i_trade_timestamp},${i_price},${i_quantity},${i_trade_date},${i_company_name},${DESCRIPTION}</stringProp>
+          <stringProp name="variableNames"></stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="consistencyLevel">QUORUM</stringProp>
+          <stringProp name="queryTimeout"></stringProp>
+          <stringProp name="batchSize"></stringProp>
+        </org.apache.cassandra.jmeter.sampler.CassandraSampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Nearby Readers" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">18</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">30</stringProp>
+        <longProp name="ThreadGroup.start_time">1394080798000</longProp>
+        <longProp name="ThreadGroup.end_time">1394080798000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Trade Dates" enabled="true">
+          <stringProp name="filename">tradedates.csv</stringProp>
+          <stringProp name="fileEncoding"></stringProp>
+          <stringProp name="variableNames">tradedate</stringProp>
+          <stringProp name="delimiter">,</stringProp>
+          <boolProp name="quotedData">false</boolProp>
+          <boolProp name="recycle">true</boolProp>
+          <boolProp name="stopThread">false</boolProp>
+          <stringProp name="shareMode">shareMode.group</stringProp>
+        </CSVDataSet>
+        <hashTree/>
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Tickers" enabled="true">
+          <stringProp name="filename">tickers.csv</stringProp>
+          <stringProp name="fileEncoding"></stringProp>
+          <stringProp name="variableNames">ticker</stringProp>
+          <stringProp name="delimiter">,</stringProp>
+          <boolProp name="quotedData">false</boolProp>
+          <boolProp name="recycle">true</boolProp>
+          <boolProp name="stopThread">false</boolProp>
+          <stringProp name="shareMode">shareMode.group</stringProp>
+        </CSVDataSet>
+        <hashTree/>
+        <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+          <stringProp name="cacheKey">bs1</stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="script">import java.text.SimpleDateFormat;
+String td = vars.get(&quot;tradedate&quot;);
+SimpleDateFormat cassandraDateFormat = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ssZ&quot;);
+sd = new Date(cassandraDateFormat.parse(td).getTime() + new Double((14 + Integer.parseInt(vars.get(&quot;tradehour&quot;)) +  Math.random()) * 3600000 ).intValue() ) ;
+ed10 = new Date(sd.getTime() + 600000);
+ed1 = new Date(sd.getTime() + 60000);
+vars.put(&quot;starttime&quot;, cassandraDateFormat.format(sd));
+vars.put(&quot;endtime10&quot;, cassandraDateFormat.format(ed10));
+vars.put(&quot;endtime1&quot;, cassandraDateFormat.format(ed1));
+</stringProp>
+          <stringProp name="scriptLanguage">groovy</stringProp>
+        </JSR223PreProcessor>
+        <hashTree/>
+        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="false">
+          <boolProp name="displayJMeterProperties">false</boolProp>
+          <boolProp name="displayJMeterVariables">true</boolProp>
+          <boolProp name="displaySystemProperties">false</boolProp>
+        </DebugSampler>
+        <hashTree/>
+        <RandomController guiclass="RandomControlGui" testclass="RandomController" testname="Random Controller" enabled="true">
+          <intProp name="InterleaveControl.style">1</intProp>
+        </RandomController>
+        <hashTree>
+          <org.apache.cassandra.jmeter.sampler.CassandraSampler guiclass="TestBeanGUI" testclass="org.apache.cassandra.jmeter.sampler.CassandraSampler" testname="Trade by id" enabled="true">
+            <stringProp name="sessionName">nearby</stringProp>
+            <stringProp name="queryType">Prepared Statement</stringProp>
+            <stringProp name="query">select trade_id, description, exchng, price, quantity, extra_id, ticker, trade_date, trade_timestamp, company_name from stock.trades where trade_id = ?</stringProp>
+            <stringProp name="queryArguments">${trade_id}</stringProp>
+            <stringProp name="variableNames">OUT_TRADEID</stringProp>
+            <stringProp name="resultVariable"></stringProp>
+            <stringProp name="consistencyLevel">QUORUM</stringProp>
+            <stringProp name="queryTimeout"></stringProp>
+            <stringProp name="batchSize"></stringProp>
+          </org.apache.cassandra.jmeter.sampler.CassandraSampler>
+          <hashTree/>
+          <org.apache.cassandra.jmeter.sampler.CassandraSampler guiclass="TestBeanGUI" testclass="org.apache.cassandra.jmeter.sampler.CassandraSampler" testname="10 Minute Range By Ticker First 1" enabled="true">
+            <stringProp name="sessionName">nearby</stringProp>
+            <stringProp name="queryType">Prepared Statement</stringProp>
+            <stringProp name="query">select trade_id, description, exchng, price, quantity, extra_id, ticker, trade_date, trade_timestamp, company_name from stock.trades_by_tickerday where ticker = ? and trade_date = ? and trade_timestamp &gt;= ? and trade_timestamp &lt;= ? LIMIT 1;</stringProp>
+            <stringProp name="queryArguments">${ticker},${tradedate},${starttime},${endtime10}</stringProp>
+            <stringProp name="variableNames">OUT_TRADEID</stringProp>
+            <stringProp name="resultVariable"></stringProp>
+            <stringProp name="consistencyLevel">QUORUM</stringProp>
+            <stringProp name="queryTimeout"></stringProp>
+            <stringProp name="batchSize"></stringProp>
+          </org.apache.cassandra.jmeter.sampler.CassandraSampler>
+          <hashTree/>
+          <org.apache.cassandra.jmeter.sampler.CassandraSampler guiclass="TestBeanGUI" testclass="org.apache.cassandra.jmeter.sampler.CassandraSampler" testname="Count 10 Minute Range By Ticker First 1" enabled="true">
+            <stringProp name="sessionName">nearby</stringProp>
+            <stringProp name="queryType">Prepared Statement</stringProp>
+            <stringProp name="query">select count(*) from stock.trades_by_tickerday where ticker = ? and trade_date = ? and trade_timestamp &gt;= ? and trade_timestamp &lt;= ?;</stringProp>
+            <stringProp name="queryArguments">${ticker},${tradedate},${starttime},${endtime10}</stringProp>
+            <stringProp name="variableNames">OUT_TRADEID</stringProp>
+            <stringProp name="resultVariable"></stringProp>
+            <stringProp name="consistencyLevel">QUORUM</stringProp>
+            <stringProp name="queryTimeout"></stringProp>
+            <stringProp name="batchSize"></stringProp>
+          </org.apache.cassandra.jmeter.sampler.CassandraSampler>
+          <hashTree/>
+          <org.apache.cassandra.jmeter.sampler.CassandraSampler guiclass="TestBeanGUI" testclass="org.apache.cassandra.jmeter.sampler.CassandraSampler" testname="1 Minute Range By Hour First 1" enabled="true">
+            <stringProp name="sessionName">nearby</stringProp>
+            <stringProp name="queryType">Prepared Statement</stringProp>
+            <stringProp name="query">select trade_id, description, exchng, price, quantity, extra_id, ticker, trade_date, trade_timestamp, company_name from stock.trades_by_datehour where trade_date = ? and date_hour = ? and trade_timestamp &gt;= ? and trade_timestamp &lt;= ? LIMIT 1;</stringProp>
+            <stringProp name="queryArguments">${tradedate},${tradehour},${starttime},${endtime1}</stringProp>
+            <stringProp name="variableNames">OUT_TRADEID</stringProp>
+            <stringProp name="resultVariable"></stringProp>
+            <stringProp name="consistencyLevel">QUORUM</stringProp>
+            <stringProp name="queryTimeout"></stringProp>
+            <stringProp name="batchSize"></stringProp>
+          </org.apache.cassandra.jmeter.sampler.CassandraSampler>
+          <hashTree/>
+        </hashTree>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Faraway Writers" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">12</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">30</stringProp>
+        <longProp name="ThreadGroup.start_time">1394856749000</longProp>
+        <longProp name="ThreadGroup.end_time">1394856749000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="New Trades 0303" enabled="true">
+          <stringProp name="filename">/CASOPT/csv/0303.full.csv</stringProp>
+          <stringProp name="fileEncoding"></stringProp>
+          <stringProp name="variableNames">i_trade_id,i_ticker,i_exchng,i_trade_timestamp,i_price,i_quantity,i_trade_date,i_extra_id,i_company_name,i_tradehour</stringProp>
+          <stringProp name="delimiter">|</stringProp>
+          <boolProp name="quotedData">false</boolProp>
+          <boolProp name="recycle">false</boolProp>
+          <boolProp name="stopThread">true</boolProp>
+          <stringProp name="shareMode">shareMode.group</stringProp>
+        </CSVDataSet>
+        <hashTree/>
+        <org.apache.cassandra.jmeter.sampler.CassandraSampler guiclass="TestBeanGUI" testclass="org.apache.cassandra.jmeter.sampler.CassandraSampler" testname="Write trades" enabled="true">
+          <stringProp name="sessionName">faraway</stringProp>
+          <stringProp name="queryType">Prepared Statement</stringProp>
+          <stringProp name="query">insert into trades (trade_id,ticker,exchng,trade_timestamp, price , quantity , trade_date, company_name, description) values (?,?,?,?,?,?,?,?,?)</stringProp>
+          <stringProp name="queryArguments">${i_trade_id},${i_ticker},${i_exchng},${i_trade_timestamp},${i_price},${i_quantity},${i_trade_date},${i_company_name},${DESCRIPTION}</stringProp>
+          <stringProp name="variableNames"></stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="consistencyLevel">LOCAL_QUORUM</stringProp>
+          <stringProp name="queryTimeout"></stringProp>
+          <stringProp name="batchSize"></stringProp>
+        </org.apache.cassandra.jmeter.sampler.CassandraSampler>
+        <hashTree/>
+        <org.apache.cassandra.jmeter.sampler.CassandraSampler guiclass="TestBeanGUI" testclass="org.apache.cassandra.jmeter.sampler.CassandraSampler" testname="Write trades_by_tickerday" enabled="true">
+          <stringProp name="sessionName">faraway</stringProp>
+          <stringProp name="queryType">Prepared Statement</stringProp>
+          <stringProp name="query">insert into trades_by_tickerday (trade_id,ticker,exchng,trade_timestamp, price , quantity , trade_date, company_name, description) values (?,?,?,?,?,?,?,?,?)</stringProp>
+          <stringProp name="queryArguments">${i_trade_id},${i_ticker},${i_exchng},${i_trade_timestamp},${i_price},${i_quantity},${i_trade_date},${i_company_name},${DESCRIPTION}</stringProp>
+          <stringProp name="variableNames"></stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="consistencyLevel">LOCAL_QUORUM</stringProp>
+          <stringProp name="queryTimeout"></stringProp>
+          <stringProp name="batchSize"></stringProp>
+        </org.apache.cassandra.jmeter.sampler.CassandraSampler>
+        <hashTree/>
+        <org.apache.cassandra.jmeter.sampler.CassandraSampler guiclass="TestBeanGUI" testclass="org.apache.cassandra.jmeter.sampler.CassandraSampler" testname="Write trades_by_datehour" enabled="true">
+          <stringProp name="sessionName">faraway</stringProp>
+          <stringProp name="queryType">Prepared Statement</stringProp>
+          <stringProp name="query">insert into trades_by_datehour (trade_id,date_hour, ticker,exchng,trade_timestamp, price , quantity , trade_date, company_name, description) values (?,?,?,?,?,?,?,?,?,?)</stringProp>
+          <stringProp name="queryArguments">${i_trade_id},${i_tradehour},${i_ticker},${i_exchng},${i_trade_timestamp},${i_price},${i_quantity},${i_trade_date},${i_company_name},${DESCRIPTION}</stringProp>
+          <stringProp name="variableNames"></stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="consistencyLevel">LOCAL_QUORUM</stringProp>
+          <stringProp name="queryTimeout"></stringProp>
+          <stringProp name="batchSize"></stringProp>
+        </org.apache.cassandra.jmeter.sampler.CassandraSampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Faraway Readers" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">18</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">30</stringProp>
+        <longProp name="ThreadGroup.start_time">1394080798000</longProp>
+        <longProp name="ThreadGroup.end_time">1394080798000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Trade Dates" enabled="true">
+          <stringProp name="filename">tradedates.csv</stringProp>
+          <stringProp name="fileEncoding"></stringProp>
+          <stringProp name="variableNames">tradedate</stringProp>
+          <stringProp name="delimiter">,</stringProp>
+          <boolProp name="quotedData">false</boolProp>
+          <boolProp name="recycle">true</boolProp>
+          <boolProp name="stopThread">false</boolProp>
+          <stringProp name="shareMode">shareMode.group</stringProp>
+        </CSVDataSet>
+        <hashTree/>
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Tickers" enabled="true">
+          <stringProp name="filename">tickers.csv</stringProp>
+          <stringProp name="fileEncoding"></stringProp>
+          <stringProp name="variableNames">ticker</stringProp>
+          <stringProp name="delimiter">,</stringProp>
+          <boolProp name="quotedData">false</boolProp>
+          <boolProp name="recycle">true</boolProp>
+          <boolProp name="stopThread">false</boolProp>
+          <stringProp name="shareMode">shareMode.group</stringProp>
+        </CSVDataSet>
+        <hashTree/>
+        <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+          <stringProp name="cacheKey">bs1</stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="script">import java.text.SimpleDateFormat;
+String td = vars.get(&quot;tradedate&quot;);
+SimpleDateFormat cassandraDateFormat = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ssZ&quot;);
+sd = new Date(cassandraDateFormat.parse(td).getTime() + new Double((14 + Integer.parseInt(vars.get(&quot;tradehour&quot;)) +  Math.random()) * 3600000 ).intValue() ) ;
+ed10 = new Date(sd.getTime() + 600000);
+ed1 = new Date(sd.getTime() + 60000);
+vars.put(&quot;starttime&quot;, cassandraDateFormat.format(sd));
+vars.put(&quot;endtime10&quot;, cassandraDateFormat.format(ed10));
+vars.put(&quot;endtime1&quot;, cassandraDateFormat.format(ed1));
+</stringProp>
+          <stringProp name="scriptLanguage">groovy</stringProp>
+        </JSR223PreProcessor>
+        <hashTree/>
+        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="false">
+          <boolProp name="displayJMeterProperties">false</boolProp>
+          <boolProp name="displayJMeterVariables">true</boolProp>
+          <boolProp name="displaySystemProperties">false</boolProp>
+        </DebugSampler>
+        <hashTree/>
+        <RandomController guiclass="RandomControlGui" testclass="RandomController" testname="Random Controller" enabled="true">
+          <intProp name="InterleaveControl.style">1</intProp>
+        </RandomController>
+        <hashTree>
+          <org.apache.cassandra.jmeter.sampler.CassandraSampler guiclass="TestBeanGUI" testclass="org.apache.cassandra.jmeter.sampler.CassandraSampler" testname="Trade by id" enabled="true">
+            <stringProp name="sessionName">faraway</stringProp>
+            <stringProp name="queryType">Prepared Statement</stringProp>
+            <stringProp name="query">select trade_id, description, exchng, price, quantity, extra_id, ticker, trade_date, trade_timestamp, company_name from stock.trades where trade_id = ?</stringProp>
+            <stringProp name="queryArguments">${trade_id}</stringProp>
+            <stringProp name="variableNames">OUT_TRADEID</stringProp>
+            <stringProp name="resultVariable"></stringProp>
+            <stringProp name="consistencyLevel">LOCAL_QUORUM</stringProp>
+            <stringProp name="queryTimeout"></stringProp>
+            <stringProp name="batchSize"></stringProp>
+          </org.apache.cassandra.jmeter.sampler.CassandraSampler>
+          <hashTree/>
+          <org.apache.cassandra.jmeter.sampler.CassandraSampler guiclass="TestBeanGUI" testclass="org.apache.cassandra.jmeter.sampler.CassandraSampler" testname="10 Minute Range By Ticker First 1" enabled="true">
+            <stringProp name="sessionName">faraway</stringProp>
+            <stringProp name="queryType">Prepared Statement</stringProp>
+            <stringProp name="query">select trade_id, description, exchng, price, quantity, extra_id, ticker, trade_date, trade_timestamp, company_name from stock.trades_by_tickerday where ticker = ? and trade_date = ? and trade_timestamp &gt;= ? and trade_timestamp &lt;= ? LIMIT 1;</stringProp>
+            <stringProp name="queryArguments">${ticker},${tradedate},${starttime},${endtime10}</stringProp>
+            <stringProp name="variableNames">OUT_TRADEID</stringProp>
+            <stringProp name="resultVariable"></stringProp>
+            <stringProp name="consistencyLevel">LOCAL_QUORUM</stringProp>
+            <stringProp name="queryTimeout"></stringProp>
+            <stringProp name="batchSize"></stringProp>
+          </org.apache.cassandra.jmeter.sampler.CassandraSampler>
+          <hashTree/>
+          <org.apache.cassandra.jmeter.sampler.CassandraSampler guiclass="TestBeanGUI" testclass="org.apache.cassandra.jmeter.sampler.CassandraSampler" testname="1 Minute Range By Hour First 1" enabled="true">
+            <stringProp name="sessionName">faraway</stringProp>
+            <stringProp name="queryType">Prepared Statement</stringProp>
+            <stringProp name="query">select trade_id, description, exchng, price, quantity, extra_id, ticker, trade_date, trade_timestamp, company_name from stock.trades_by_datehour where trade_date = ? and date_hour = ? and trade_timestamp &gt;= ? and trade_timestamp &lt;= ? LIMIT 1;</stringProp>
+            <stringProp name="queryArguments">${tradedate},${tradehour},${starttime},${endtime1}</stringProp>
+            <stringProp name="variableNames">OUT_TRADEID</stringProp>
+            <stringProp name="resultVariable"></stringProp>
+            <stringProp name="consistencyLevel">LOCAL_QUORUM</stringProp>
+            <stringProp name="queryTimeout"></stringProp>
+            <stringProp name="batchSize"></stringProp>
+          </org.apache.cassandra.jmeter.sampler.CassandraSampler>
+          <hashTree/>
+          <org.apache.cassandra.jmeter.sampler.CassandraSampler guiclass="TestBeanGUI" testclass="org.apache.cassandra.jmeter.sampler.CassandraSampler" testname="Count 10 Minute Range By Ticker First 1" enabled="true">
+            <stringProp name="sessionName">nearby</stringProp>
+            <stringProp name="queryType">Prepared Statement</stringProp>
+            <stringProp name="query">select count(*) from stock.trades_by_tickerday where ticker = ? and trade_date = ? and trade_timestamp &gt;= ? and trade_timestamp &lt;= ?;</stringProp>
+            <stringProp name="queryArguments">${ticker},${tradedate},${starttime},${endtime10}</stringProp>
+            <stringProp name="variableNames">OUT_TRADEID</stringProp>
+            <stringProp name="resultVariable"></stringProp>
+            <stringProp name="consistencyLevel">QUORUM</stringProp>
+            <stringProp name="queryTimeout"></stringProp>
+            <stringProp name="batchSize"></stringProp>
+          </org.apache.cassandra.jmeter.sampler.CassandraSampler>
+          <hashTree/>
+        </hashTree>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>

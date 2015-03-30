@@ -1,0 +1,10 @@
+CREATE KEYSPACE test1 WITH REPLICATION = {'class' : 'SimpleStrategy', 'replication_factor': 2 };
+USE test1;
+CREATE TABLE addressbook_wide ( firstname text, lastname text, company text, address text, city text, county text, state text, zip text, phone text, fax text, email text, web text, PRIMARY KEY (state,email));
+CREATE TABLE addressbook_mid ( firstname text, lastname text, company text, address text, city text, county text, state text, zip text, phone text, fax text, email text, web text, PRIMARY KEY (city,lastname,firstname));
+CREATE TABLE addressbook_narrow ( firstname text, lastname text, company text, address text, city text, county text, state text, zip text, phone text, fax text, email text, web text, PRIMARY KEY (email));
+CREATE TABLE nickname (name text, age int, nickname text, PRIMARY KEY (name, age));
+COPY addressbook_mid (firstname,lastname,company,address,city,county,state,zip,phone,fax,email,web) FROM 'sample-address-data.csv' WITH HEADER=true;
+COPY addressbook_wide (firstname,lastname,company,address,city,county,state,zip,phone,fax,email,web) FROM 'sample-address-data.csv' WITH HEADER=true;
+COPY addressbook_narrow (firstname,lastname,company,address,city,county,state,zip,phone,fax,email,web) FROM 'sample-address-data.csv' WITH HEADER=true;
+COPY nickname FROM 'sample-nicknames-data.csv' WITH HEADER=true;

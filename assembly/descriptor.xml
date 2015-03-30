@@ -1,0 +1,15 @@
+<assembly>
+<formats>
+    <format>zip</format>
+</formats>
+
+<fileSets>
+    <fileSet>
+        <directory>src</directory>
+        <includes>
+            <include>**/*</include>
+        </includes>
+        <outputDirectory></outputDirectory>
+    </fileSet>
+</fileSets>
+</assembly>

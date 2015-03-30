@@ -1,0 +1,7 @@
+-- Tickers
+create table tickers (ticker string, company_name string) row format delimited fields terminated by '|' stored as textfile;
+load data local inpath 'tickers.csv' overwrite into table tickers;
+
+-- Trades Staging
+create table trades_staging (trade_id int, ticker string, exchng string, trade_timestamp string, price float, quantity int, trade_date string) row format delimited fields terminated by '|' stored as textfile;
+
