@@ -1,4 +1,4 @@
-export PATH=$PATH:~/labwork/bin:~/labwork/apache-jmeter-2.12-custom/bin
+export PATH=$PATH:~/labwork/bin:~/apache_jmeter/bin
 #help.sh
 echo
 echo "For help, type 'help.sh'"
