@@ -22,6 +22,6 @@ echo "alter table stock.trades_by_tickerday WITH compaction = {'class': 'Leveled
 echo "alter table stock.trades with read_repair_chance=1;" | cqlsh -k stock node0
 
 
-loadsstables.sh node0
+loadsstables.sh -q node0
 
 
