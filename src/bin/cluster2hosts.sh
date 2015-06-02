@@ -15,7 +15,7 @@ fi
 FIRSTNODE=$1
 
 i=1
-until nodetool -h $FIRSTNODE info >/dev/null 2>&1
+until ssh $FIRSTNODE nodetool info >/dev/null 2>&1
 do
    echo "Waiting for Cassandra"
    sleep 10;
@@ -26,7 +26,7 @@ do
    fi
 done
 
-HOSTS=`nodetool -h $FIRSTNODE status 2>/dev/null |  sed '/[UD][NLJM]/!d ; s/..  \([0-9\.]*\) .*/\1/' `
+HOSTS=`ssh $FIRSTNODE nodetool status 2>/dev/null |  sed '/[UD][NLJM]/!d ; s/..  \([0-9\.]*\) .*/\1/' `
  for ip in $HOSTS; do
     hostnm=`ssh -o StrictHostKeyChecking=no $ip hostname`
     hostline="$ip $hostnm"

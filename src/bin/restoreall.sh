@@ -7,7 +7,7 @@ function usage() {
 }
 
 function getnodelist() {
-nodelist=`nodetool -h $FIRSTNODE status |  sed '/[UD][NLJM]/!d ; s/..  \([0-9\.]*\) .*/\1/'`
+nodelist=`ssh $FIRSTNODE nodetool status |  sed '/[UD][NLJM]/!d ; s/..  \([0-9\.]*\) .*/\1/'`
 }
 
 

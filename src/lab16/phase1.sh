@@ -8,13 +8,23 @@ cluster2hosts.sh node0
 
 # Screw up a token
 
-ssh node4 'nodetool move \\-7378697629483820647'
+ssh node4 'nodetool move -- -7378697629483820647'
+
 
 # import the data
 
 cd /CASOPT/SSTables
 
-echo "create keyspace stock with replication = {'class':'NetworkTopologyStrategy','us-west-2':3,'ap-southeast':2 };" | cqlsh node0 
+# note - we need to strip off an ending "-1", 'cuz that's what the snitch does
+
+PRIMARY_AVAIL_ZONE=`curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone`
+PRIMARY_REGION="`echo \"$PRIMARY_AVAIL_ZONE\" | sed -e 's:\([0-9][0-9]*\)[a-z]*\$:\\1:' | sed 's:-1$::'`"
+
+SECONDARY_AVAIL_ZONE=`ssh node5 curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone`
+SECONDARY_REGION="`echo \"$SECONDARY_AVAIL_ZONE\" | sed -e 's:\([0-9][0-9]*\)[a-z]*\$:\\1:' | sed 's:-1$::'`"
+
+
+echo "create keyspace stock with replication = {'class':'NetworkTopologyStrategy','$PRIMARY_REGION':3,'$SECONDARY_REGION':2 };" | cqlsh node0 
 
 cat create* | cqlsh -k stock node0
 

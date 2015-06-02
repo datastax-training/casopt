@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="2.6" jmeter="2.11 r1554548">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="hostname" elementType="Argument">
+            <stringProp name="Argument.name">hostname</stringProp>
+            <stringProp name="Argument.value">54.219.206.153</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="DESCRIPTION2" elementType="Argument">
+            <stringProp name="Argument.name">DESCRIPTION2</stringProp>
+            <stringProp name="Argument.value">Securities may be represented by a certificate or more typically non-certificated that is in electronic or book entry only form. Certificates may be bearer meaning they entitle the holder to rights under the security merely by holding the security or registered meaning they entitle the holder to rights only if he or she appears on a security register maintained by the issuer or an intermediary. They include shares of corporate stock or mutual funds bonds issued by corporations or governmental agencies stock options or other options limited partnership units and various other formal investment instruments that are negotiable and fungible.</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </Arguments>
+      <hashTree/>
+      <org.apache.cassandra.jmeter.config.CassandraConnection guiclass="TestBeanGUI" testclass="org.apache.cassandra.jmeter.config.CassandraConnection" testname="Cassandra Connection" enabled="true">
+        <stringProp name="dataSource">seaport1</stringProp>
+        <stringProp name="contactPoints">${__P(hostname,54.215.208.116)}</stringProp>
+        <stringProp name="keyspace">stock</stringProp>
+        <stringProp name="username"></stringProp>
+        <stringProp name="password"></stringProp>
+        <stringProp name="sessionName">seaport</stringProp>
+      </org.apache.cassandra.jmeter.config.CassandraConnection>
+      <hashTree/>
+      <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>false</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>false</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>false</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="RespTimeGraphVisualizer" testclass="ResultCollector" testname="Response Time Graph" enabled="false">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>false</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="TableVisualizer" testclass="ResultCollector" testname="View Results in Table" enabled="false">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>false</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="Random Hour" enabled="true">
+        <stringProp name="maximumValue">8</stringProp>
+        <stringProp name="minimumValue">1</stringProp>
+        <stringProp name="outputFormat"></stringProp>
+        <boolProp name="perThread">true</boolProp>
+        <stringProp name="randomSeed"></stringProp>
+        <stringProp name="variableName">tradehour</stringProp>
+      </RandomVariableConfig>
+      <hashTree/>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Workers" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(numWriters,1)}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">30</stringProp>
+        <longProp name="ThreadGroup.start_time">1394080798000</longProp>
+        <longProp name="ThreadGroup.end_time">1394080798000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Trade Dates" enabled="true">
+          <stringProp name="filename">tradedates.csv</stringProp>
+          <stringProp name="fileEncoding"></stringProp>
+          <stringProp name="variableNames">tradedate</stringProp>
+          <stringProp name="delimiter">,</stringProp>
+          <boolProp name="quotedData">false</boolProp>
+          <boolProp name="recycle">true</boolProp>
+          <boolProp name="stopThread">false</boolProp>
+          <stringProp name="shareMode">shareMode.group</stringProp>
+        </CSVDataSet>
+        <hashTree/>
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Tickers" enabled="true">
+          <stringProp name="filename">tickers.csv</stringProp>
+          <stringProp name="fileEncoding"></stringProp>
+          <stringProp name="variableNames">ticker</stringProp>
+          <stringProp name="delimiter">,</stringProp>
+          <boolProp name="quotedData">false</boolProp>
+          <boolProp name="recycle">true</boolProp>
+          <boolProp name="stopThread">false</boolProp>
+          <stringProp name="shareMode">shareMode.group</stringProp>
+        </CSVDataSet>
+        <hashTree/>
+        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="false">
+          <boolProp name="displayJMeterProperties">false</boolProp>
+          <boolProp name="displayJMeterVariables">true</boolProp>
+          <boolProp name="displaySystemProperties">false</boolProp>
+        </DebugSampler>
+        <hashTree/>
+        <org.apache.cassandra.jmeter.sampler.CassandraSampler guiclass="TestBeanGUI" testclass="org.apache.cassandra.jmeter.sampler.CassandraSampler" testname="1 Minute Range By Hour First 5" enabled="true">
+          <stringProp name="sessionName">seaport</stringProp>
+          <stringProp name="queryType">Prepared Statement</stringProp>
+          <stringProp name="query">select trade_id, ticker, trade_date, date_hour, trade_timestamp from stock.trades_by_datehour
+where trade_date = ? and date_hour = ? and trade_timestamp &gt;= ? and trade_timestamp &lt;= ? LIMIT 5;</stringProp>
+          <stringProp name="queryArguments">${tradedate},${tradehour},${starttime},${endtime1}</stringProp>
+          <stringProp name="variableNames">OUT_TRADEID, OUT_TICKER, OUT_TRADE_DATE, OUT_DATE_HOUR, OUT_TRADE_TIMESTAMP</stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="consistencyLevel">${__P(consistencyLevel,ONE)}</stringProp>
+          <stringProp name="queryTimeout"></stringProp>
+          <stringProp name="batchSize"></stringProp>
+        </org.apache.cassandra.jmeter.sampler.CassandraSampler>
+        <hashTree>
+          <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+            <stringProp name="scriptLanguage">groovy</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey">gendates</stringProp>
+            <stringProp name="script">import java.text.SimpleDateFormat;
+String td = vars.get(&quot;tradedate&quot;);
+SimpleDateFormat cassandraDateFormat = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ssZ&quot;);
+sd = new Date(cassandraDateFormat.parse(td).getTime() + new Double((14 + Integer.parseInt(vars.get(&quot;tradehour&quot;)) +  Math.random()) * 3600000 ).intValue() ) ;
+ed10 = new Date(sd.getTime() + 600000);
+ed1 = new Date(sd.getTime() + 60000);
+vars.put(&quot;starttime&quot;, cassandraDateFormat.format(sd));
+vars.put(&quot;endtime10&quot;, cassandraDateFormat.format(ed10));
+vars.put(&quot;endtime1&quot;, cassandraDateFormat.format(ed1));</stringProp>
+          </JSR223PreProcessor>
+          <hashTree/>
+        </hashTree>
+        <ForeachController guiclass="ForeachControlPanel" testclass="ForeachController" testname="ForEach Controller" enabled="true">
+          <stringProp name="ForeachController.inputVal">OUT_TRADEID</stringProp>
+          <stringProp name="ForeachController.returnVal">OUT_TRADEID</stringProp>
+          <boolProp name="ForeachController.useSeparator">true</boolProp>
+        </ForeachController>
+        <hashTree>
+          <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="Counter" enabled="true">
+            <stringProp name="CounterConfig.start">1</stringProp>
+            <stringProp name="CounterConfig.end"></stringProp>
+            <stringProp name="CounterConfig.incr">1</stringProp>
+            <stringProp name="CounterConfig.name">C</stringProp>
+            <stringProp name="CounterConfig.format"></stringProp>
+            <boolProp name="CounterConfig.per_user">true</boolProp>
+            <boolProp name="CounterConfig.reset_on_tg_iteration">true</boolProp>
+          </CounterConfig>
+          <hashTree/>
+          <org.apache.cassandra.jmeter.sampler.CassandraSampler guiclass="TestBeanGUI" testclass="org.apache.cassandra.jmeter.sampler.CassandraSampler" testname="Update bydatehour" enabled="true">
+            <stringProp name="sessionName">seaport</stringProp>
+            <stringProp name="queryType">Dynamic Batch</stringProp>
+            <stringProp name="query">UPDATE stock.trades_by_datehour set description = ? where trade_date = ? and date_hour = ? and trade_id = ? and trade_timestamp = ? and ticker = ?</stringProp>
+            <stringProp name="queryArguments">${DESCRIPTION2},${__V(OUT_TRADE_DATE_${C})},${__V(OUT_DATE_HOUR_${C})},${OUT_TRADEID},${__V(OUT_TRADE_TIMESTAMP_${C})},${__V(OUT_TICKER_${C})}</stringProp>
+            <stringProp name="variableNames"></stringProp>
+            <stringProp name="resultVariable"></stringProp>
+            <stringProp name="consistencyLevel">${__P(consistencyLevel,ONE)}</stringProp>
+            <stringProp name="queryTimeout"></stringProp>
+            <stringProp name="batchSize">5</stringProp>
+          </org.apache.cassandra.jmeter.sampler.CassandraSampler>
+          <hashTree/>
+          <org.apache.cassandra.jmeter.sampler.CassandraSampler guiclass="TestBeanGUI" testclass="org.apache.cassandra.jmeter.sampler.CassandraSampler" testname="selectback" enabled="false">
+            <stringProp name="sessionName">seaport</stringProp>
+            <stringProp name="queryType">Prepared Statement</stringProp>
+            <stringProp name="query">SELECT description from  stock.trades_by_datehour where trade_date = ? and date_hour = ? and trade_id = ? and trade_timestamp = ? and ticker = ?</stringProp>
+            <stringProp name="queryArguments">${__V(OUT_TRADE_DATE_${C})},${__V(OUT_DATE_HOUR_${C})},${OUT_TRADEID},${__V(OUT_TRADE_TIMESTAMP_${C})},${__V(OUT_TICKER_${C})}</stringProp>
+            <stringProp name="variableNames">OUT_DESC</stringProp>
+            <stringProp name="resultVariable"></stringProp>
+            <stringProp name="consistencyLevel">${__P(consistencyLevel,ONE)}</stringProp>
+            <stringProp name="queryTimeout"></stringProp>
+            <stringProp name="batchSize"></stringProp>
+          </org.apache.cassandra.jmeter.sampler.CassandraSampler>
+          <hashTree/>
+        </hashTree>
+        <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Do 5 inserts" enabled="true">
+          <boolProp name="LoopController.continue_forever">true</boolProp>
+          <stringProp name="LoopController.loops">5</stringProp>
+        </LoopController>
+        <hashTree>
+          <org.apache.cassandra.jmeter.sampler.CassandraSampler guiclass="TestBeanGUI" testclass="org.apache.cassandra.jmeter.sampler.CassandraSampler" testname="Insert by datehour" enabled="true">
+            <stringProp name="sessionName">seaport</stringProp>
+            <stringProp name="queryType">Dynamic Batch</stringProp>
+            <stringProp name="query">insert into trades_by_datehour (trade_id,date_hour, ticker,exchng,trade_timestamp, price , quantity , trade_date, company_name, description) values (?,?,?,?,?,?,?,?,?,?)</stringProp>
+            <stringProp name="queryArguments">${i_trade_id},${i_tradehour},${i_ticker},${i_exchng},${i_trade_timestamp},${i_price},${i_quantity},${i_trade_date},${i_company_name},${DESCRIPTION2}</stringProp>
+            <stringProp name="variableNames"></stringProp>
+            <stringProp name="resultVariable"></stringProp>
+            <stringProp name="consistencyLevel">ONE</stringProp>
+            <stringProp name="queryTimeout"></stringProp>
+            <stringProp name="batchSize">5</stringProp>
+          </org.apache.cassandra.jmeter.sampler.CassandraSampler>
+          <hashTree>
+            <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="New Trades 0303" enabled="true">
+              <stringProp name="filename">/CASOPT/csv/0303.full.csv</stringProp>
+              <stringProp name="fileEncoding"></stringProp>
+              <stringProp name="variableNames">i_trade_id,i_ticker,i_exchng,i_trade_timestamp,i_price,i_quantity,i_trade_date,i_extra_id,i_company_name,i_tradehour</stringProp>
+              <stringProp name="delimiter">|</stringProp>
+              <boolProp name="quotedData">false</boolProp>
+              <boolProp name="recycle">false</boolProp>
+              <boolProp name="stopThread">false</boolProp>
+              <stringProp name="shareMode">shareMode.group</stringProp>
+            </CSVDataSet>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>

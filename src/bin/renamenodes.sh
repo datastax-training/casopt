@@ -21,7 +21,7 @@ FIRSTNODE=$2
 
 # Make sure C* is running
 i=1
-until nodetool -h $FIRSTNODE info >/dev/null 2>&1
+until ssh $FIRSTNODE nodetool info >/dev/null 2>&1
 do
    echo "Waiting for Cassandra"
    sleep 10;
@@ -35,7 +35,7 @@ done
 #get nodes sorted by datacenter
 #then by launch index
 
-NODELIST0=`nodetool -h $FIRSTNODE status | sed -n '/Datacenter/ { s/.*: // ; h }
+NODELIST0=`ssh $FIRSTNODE nodetool status | sed -n '/Datacenter/ { s/.*: // ; h }
 /..  [0-9]/ { G ; s/[^0-9]*\([0-9.]*\).*\n\(.*\)/\2 \1/ ; p } ' `
 
 export IFS=$'\n'

@@ -4,7 +4,7 @@
 
     <groupId>labwork</groupId>
     <artifactId>casopt</artifactId>
-    <version>r2.2</version>
+    <version>r2.3</version>
     <packaging>pom</packaging>
 
     <build>

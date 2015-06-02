@@ -8,7 +8,7 @@ function usage() {
 }
 
 function getnodelist() {
-  nodelist=`nodetool -h $FIRSTNODE status |  sed '/[UD][NLJM]/!d ; s/..  \([0-9\.]*\) .*/\1/'`
+  nodelist=`ssh $FIRSTNODE nodetool status |  sed '/[UD][NLJM]/!d ; s/..  \([0-9\.]*\) .*/\1/'`
 }
 
 while [[ $1 == -* ]] ; do 
@@ -50,6 +50,6 @@ echo 'Creating Backup: "'$BACKUP'" for cluster starting with: "'$FIRSTNODE'"'
 getnodelist
 
 for ip in $nodelist; do
- nodetool -h $ip snapshot $KST -t $BACKUP
+ ssh $ip nodetool snapshot $KST -t $BACKUP
 done
 
