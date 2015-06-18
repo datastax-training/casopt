@@ -2,10 +2,6 @@
 
 set -v
 
-# bring the nodes in
-
-cluster2hosts.sh node0
-
 # Screw up a token
 
 ssh node4 'nodetool move -- -7378697629483820647'
