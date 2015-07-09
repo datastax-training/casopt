@@ -4,7 +4,7 @@
 
 ssh node4_ext 'sudo bash -s ' <<ABC
 #sstable manipulation
-DIR=/mnt/ephemeral/cassandra/data/stock/trades_by_datehour
+DIR=/mnt/ephemeral/cassandra/data/stock/trades_by_datehour*
 TMPFILE=tmpsstable
 
 cd \$DIR
