@@ -13,14 +13,7 @@ cd /CASOPT/SSTables
 
 # note - we need to strip off an ending "-1", 'cuz that's what the snitch does
 
-PRIMARY_AVAIL_ZONE=`curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone`
-PRIMARY_REGION="`echo \"$PRIMARY_AVAIL_ZONE\" | sed -e 's:\([0-9][0-9]*\)[a-z]*\$:\\1:' | sed 's:-1$::'`"
-
-SECONDARY_AVAIL_ZONE=`ssh node5_ext curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone`
-SECONDARY_REGION="`echo \"$SECONDARY_AVAIL_ZONE\" | sed -e 's:\([0-9][0-9]*\)[a-z]*\$:\\1:' | sed 's:-1$::'`"
-
-
-echo "create keyspace stock with replication = {'class':'NetworkTopologyStrategy','$PRIMARY_REGION':3,'$SECONDARY_REGION':2 };" | cqlsh node0_ext 
+echo "create keyspace stock with replication = {'class':'NetworkTopologyStrategy','nearby':3,'faraway':2 };" | cqlsh node0_ext 
 
 cat create* | cqlsh -k stock node0_ext
 
