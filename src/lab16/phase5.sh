@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# corrupt an SSTable on node4
+# corrupt an SSTable on node4_ext
 
-ssh node4 'sudo bash -s ' <<ABC
+ssh node4_ext 'sudo bash -s ' <<ABC
 #sstable manipulation
 DIR=/mnt/ephemeral/cassandra/data/stock/trades_by_datehour
 TMPFILE=tmpsstable

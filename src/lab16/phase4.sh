@@ -2,9 +2,9 @@
 
 set -v 
 
-# create hugefile on node1
+# create hugefile on node1_ext
 
-ssh node1 'sudo bash -s ' <<ABC
+ssh node1_ext 'sudo bash -s ' <<ABC
 #!/bin/bash
 
 
