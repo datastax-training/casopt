@@ -11,6 +11,7 @@ ssh node0 'if [ -f /etc/cassandra/.cassandra.yaml ] ; then cd /etc/cassandra; el
 ssh node0 service cassandra start
 sleep 15
 wipeandadd.sh node1 node0
+sleep 30
 wipeandadd.sh node2 node0
 sleep 10
 ssh node0 service opscenterd restart
